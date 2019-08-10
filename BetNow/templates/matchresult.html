@@ -1,0 +1,13 @@
+<form  method="POST" action="{% url 'mresult' matchId=matchId %}">
+    {% csrf_token %}
+ <label for="amt"><b>Select Team :</b></label>
+    <select name="d" >
+            <option value="" selected disabled hidden>--Select team--</option>
+            <option value="{{ post.team1 }}">{{ post.team1 }}</option>
+            <option value="{{ post.team2 }}">{{ post.team2 }}</option>
+    </select><br>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">vote</button>
+
+
+</form>
+

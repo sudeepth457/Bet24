@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: -15px;
+  text-align: center;
+  font-family: arial;
+}
+
+
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+    </style>
+<div align="center">
+  <h4>Search your matches to vote</h4>
+  <form method="POST" actions="">
+    {% csrf_token %}
+  <input type="text" name="search" class="form-control" placeholder="Search by team">
+  <button type="submit" class="btn">Search</button>
+
+</form>
+    </div>
+
+<br><br><br>
+<br><br>
+  <div align="center">
+      {% if messages %}
+       {% for message in messages %}
+           <p class="alert alert-{{ message.tags }}">
+               {{ message }}
+           </p>
+        {% endfor %}
+{% endif %}
+{% for d in data %}
+<div class="card" >
+    {{ d.team1}} VS {{ d.team2}}
+    <p>Available votes:<b>{{ d.votes}}</b></p>
+    <a href="{{ d.get_absolute_url }}">View Details</a><br>
+    <a href="#"></a>
+</div>
+      <br><br><br><br>
+{% endfor %}
+</div>
+{% endblock %}

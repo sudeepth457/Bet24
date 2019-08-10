@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<h3>{{user.username}}</h3>
+    {{user.email}}
+    {{profile.phonenumber}}
+    {{profile.wins}}
+    {{profile.wallet}}
+    {{profile.losses}}
+    {{profile.money_earned}}
+    <a href="{% url 'recharge' user=user.username %}">Recharge your wallet</a>
+</body>
+</html>
+{% endblock %}

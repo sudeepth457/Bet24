@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block content %}
+<br><br>
+    <small>{{ post.matchId }}</small>
+    <h3>{{ post.team1 }}</h3>
+    <h3>{{ post.team2 }}</h3>
+    <p>Venue at {{ post.stadium }},{{ post.city }} and begins in {{ post.time }}</p>
+    {% if request.user.is_authenticated %}
+         {% if view %}
+             <p>You voted {{ view.team }} with {{view.vote}} units </p>
+             {% if request.user.is_superuser %}
+             {% if result %}
+             {% else %}
+                  <a href="{% url 'mresult' matchId=post.matchId %}">set Results</a>
+             {% endif %}
+             {% endif %}
+         {% else %}
+             {% if result %}
+             {% else %}
+              <a href="{% url 'vote' matchId=post.matchId %}">Vote now</a>
+             {% endif %}
+         {% endif %}
+         {% if result %}
+              <a href="{% url 'result' matchId=post.matchId %}">Results</a>
+         {% else %}
+              <p>Results will be displayed after match completed</p>
+         {% endif %}
+    {% else %}
+         <a href="{% url 'vote' matchId=post.matchId %}">Vote now</a>
+    {% endif%}
+
+{% endblock %}

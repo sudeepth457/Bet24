@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block content %}
+<form  method="POST" >
+{% csrf_token %}
+ {{ form.as_p }}
+ {{ profileform.as_p }}
+ <input type='submit' value='Submit' class='btn btn-outline-success'>
+</form>
+{% endblock %}

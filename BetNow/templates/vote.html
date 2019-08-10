@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<script type="text/javascript">
+function increment() {
+  val = document.getElementById("number").value;
+  v={{ ava_vote }}
+  a={{ current_match.votes }}
+  if(a<v){
+  if(val<a)
+  {
+     val++;
+     document.getElementById("number").value=val;
+  }
+  }
+  if(a>v)
+  {
+      if(val<v)
+  {
+     val++;
+     document.getElementById("number").value=val;
+  }
+  }
+
+}
+function decrement() {
+  val = document.getElementById("number").value;
+  v={{ ava_vote }}
+  a={{ current_match.votes }}
+  if(val>0)
+  {
+     val--;
+     document.getElementById("number").value=val;
+  }
+}
+</script>
+{% if messages %}
+       {% for message in messages %}
+           <p class="alert alert-{{ message.tags }}">
+               {{ message }}
+           </p>
+        {% endfor %}
+{% endif %}
+<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'vote' matchId=Id %}">
+    {% csrf_token %}
+    MatchId is {{ Id }}<br>
+    match votes : {{ current_match.votes }}<br>
+    {% if ava_vote  > 0 %}
+    your Wallet: {{ profile.wallet }}<br>
+    {% if ava_vote > current_match.votes %}
+    You can vote up to match votes
+    {% else %}
+    You can vote up to {{ ava_vote }}<br>
+    {% endif %}
+    <br>
+    <label for="amt"><b>Select Team : </b></label>
+    <select name="d" required>
+            <option value="" selected disabled hidden>--Select team--</option>
+            <option value="{{ current_match.team1 }}">{{ current_match.team1 }}</option>
+            <option value="{{ current_match.team2 }}">{{ current_match.team2 }}</option>
+    </select><br>
+    <label for="amt"><b>Select Votes : </b></label>
+    <button onclick="decrement()">-</button>
+    <input type="number" style="width:88px" id="number" placeholder="Enter votes " name="v" required >
+    <button onclick="increment()">+</button><br>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">vote</button>
+    {% else %}
+    <p>Your wallet contain Rs.{{ profile.wallet }}. Minimum Rs.15 required for 1 vote. Please recharge now to vote  </p>
+    <a href="{% url 'recharge' user=request.user %}">Recharge your wallet</a>
+    {% endif %}
+</form>
+{% endblock %}

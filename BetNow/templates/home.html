@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}" />
+    <style>
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 150px;
+  text-align: center;
+  font-family: arial;
+}
+
+
+.price {
+  color: grey;
+  font-size: 20px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.row {margin: 0 200px}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  width: 25%;
+  margin: auto;
+  padding: 10px 10px;
+}
+    </style>
+</head>
+<body>
+
+
+<div align="center">
+
+                        <div class="row" style="margin: -50px -90px">
+                           <div class="column" style="margin: 30px">
+						<div class="card">
+							<a href="{% url 'list' category='Cricket' %}"><img src="{% static 'images/cricket.jpg' %}" alt=""/></a>
+							<p  class="price">Cricket</p>
+                        </div>
+
+                        </div>
+
+                        <div class="column" style="margin: 30px">
+						<div class="card">
+							<a href="{% url 'list' category='Kabbadi' %}"><img src="{% static 'images/kk.jpg' %}" alt=""  style="width:270px;height:180px;"></a>
+							<p class="price">Kabaddi</p>
+                        </div>
+
+
+                        </div>
+                        <div class="column" style="margin: 30px">
+						<div class="card">
+							<a href="#"><img src="{% static 'images/football.jpg' %}" alt="" style="width:270px;height:180px;"></a>
+							<p class="price">FootBall</p>
+                        </div>
+
+
+                        </div>
+                           </div>
+</div>
+</body>
+</html>
+{% endblock %}
+

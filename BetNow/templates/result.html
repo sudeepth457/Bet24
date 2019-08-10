@@ -1,0 +1,16 @@
+
+   {% if post %}
+         <p>{{ post.team }} won the match</p>
+            {% if post.team == voted.team %}
+               <p>Hurray!!!!! You won the match </p>
+                <p>Unit value for this match is {{match_details.unit_value}}</p>
+               <p>You got {{voted.money}}</p>
+            {% else %}
+                {% if voted %}
+                   <p>Oops!!!!!! You lost the match </p>
+                {% else %}
+                   <p>You didn't vote for the match</p>
+                {% endif %}
+                <p>Unit value for this match is {{match_details.unit_value}}</p>
+            {% endif %}
+      {% endif %}
