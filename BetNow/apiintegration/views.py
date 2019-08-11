@@ -15,8 +15,7 @@ class matches(viewsets.ModelViewSet):
 def home(request):
     response = requests.get('http://127.0.0.1:1144/employees/?format=json')
     empdata = response.json()
-    print(empdata)
-    for i in empdata:
-       print(i['firstname'])
+
+    
     return render(request, 'core.html',
     )
