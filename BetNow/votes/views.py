@@ -22,7 +22,7 @@ def usevote(request,matchId):
     if request.method == 'POST':
       selected_team = request.POST['d']
       selected_vote = request.POST['v']  # giving userid for model vote to login user
-      if int(selected_vote) > int(ava_vote) and int(selected_vote) < 0:
+      if int(selected_vote) < int(ava_vote) and int(selected_vote) > 0:
          selected_vote = int(selected_vote)
          team1 = current_match.team1
          if selected_team == team1:
@@ -44,5 +44,3 @@ def usevote(request,matchId):
 
 
     return render(request,'vote.html',context)
-
-
