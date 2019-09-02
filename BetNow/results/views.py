@@ -16,10 +16,14 @@ def results(request,matchId):
     except uservotes.DoesNotExist:
        voted = False
     match_details = get_object_or_404(match, matchId=matchId)
+    unit1 = int(match_details.col_amt/match_details.vote1)
+    unit2 = int(match_details.col_amt/match_details.vote2)
     context ={
         'post':post,
         'voted':voted,
         'match_details':match_details,
+        'unit1':unit1,
+        'unit2':unit2
     }
     return render(request, 'result.html',context)
 
@@ -55,4 +59,3 @@ def matchresult(request,matchId):
     else:
         form = resultform()
     return render(request, 'matchresult.html',context)
-

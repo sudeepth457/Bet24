@@ -1,9 +1,11 @@
 {% extends 'index.html' %}
 {% block content %}
 <br><br>
-    <small>{{ post.matchId }}</small>
-    <h3>{{ post.team1 }}</h3>
-    <h3>{{ post.team2 }}</h3>
+<a href="{% url 'list' category=post.category %}">Back to match list</a>
+<div align="center">
+    <small>match Id :{{ post.matchId }}</small>
+    <h3>Team1 :{{ post.team1 }}</h3>
+    <h3>Team2 :{{ post.team2 }}</h3>
     <p>Venue at {{ post.stadium }},{{ post.city }} and begins in {{ post.time }}</p>
     {% if request.user.is_authenticated %}
          {% if view %}
@@ -23,10 +25,10 @@
          {% if result %}
               <a href="{% url 'result' matchId=post.matchId %}">Results</a>
          {% else %}
-              <p>Results will be displayed after match completed</p>
+              <small><p>Results will be displayed after match completed</p></small>
          {% endif %}
     {% else %}
          <a href="{% url 'vote' matchId=post.matchId %}">Vote now</a>
     {% endif%}
-
+</div>
 {% endblock %}

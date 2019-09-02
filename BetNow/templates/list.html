@@ -42,8 +42,10 @@ body {
 <div align="center">
 {% for detail in details %}
 <div class="card" >
-    {{ detail.team1}} VS {{ detail.team2}}
+    <h4>{{ detail.team1}} VS {{ detail.team2}}</h4>
+    <small>{{detail.time}}</small>
     <p>Available votes:<b>{{ detail.votes}}</b></p>
+
     <a href="{{ detail.get_absolute_url }}">View Details</a><br>
     <a href="#"></a>
 </div>

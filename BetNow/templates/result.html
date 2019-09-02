@@ -1,4 +1,26 @@
-
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style>
+            #leftbox {
+                float:left;
+                width:50%;
+                height:180px;
+            }
+            #rightbox{
+                float:right;
+                width:50%;
+                height:180px;
+            }
+            h1{
+                color:green;
+                text-align:center;
+            }
+        </style>
+</head>
+<a href="{{ match_details.get_absolute_url }}">Back to Details</a><br>
+<div align="center">
    {% if post %}
          <p>{{ post.team }} won the match</p>
             {% if post.team == voted.team %}
@@ -14,3 +36,83 @@
                 <p>Unit value for this match is {{match_details.unit_value}}</p>
             {% endif %}
       {% endif %}
+   <h4> Team 1: {{match_details.team1}} Team 2: {{match_details.team2}}</h4>
+</div>
+<body>
+<div align="center">
+<div id = "leftbox">
+  <div  id="contain" style="width:500px;height:280px;"></div></div>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script>
+    Highcharts.chart('contain', {
+        chart: {
+            type: 'column',
+            spacingBottom: 10,
+            spacingTop: 10,
+            spacingLeft: 10,
+            spacingRight: 10,
+
+        },
+        title: {
+            text: 'Votes Casted'
+        },
+        xAxis: {
+            categories: ['Team',]
+
+        },
+        series: [{
+            name: 'Team 1',
+            data: [{{ match_details.vote1 }},]
+        }, {
+            name: 'Team 2',
+            data: [{{ match_details.vote2 }},]
+        }]
+    });
+
+  </script>
+
+<div id = "rightbox">
+<div  id="container" style="width:500px;height:280px;"></div></div>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+        }
+    },
+    title: {
+        text: 'Unit Value'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            depth: 35,
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Unit Value',
+        data: [
+            ['Team1',{{ unit1 }} ],
+            ['Team2',{{ unit2 }} ],
+        ]
+    }]
+});
+</script>
+</div>
+<br><br>
+<div align="Center"><h5>Total users voted: {{match_details.userno}} </h5></div>
+</body>
+  {% endblock %}
